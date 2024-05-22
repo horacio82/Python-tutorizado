@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Tuplas. Vídeo 8
+#Python tutorizado. Tuplas. Vídeo 7 y 8
 
 misDatos=("Horacio", 10, 1, 1982) #tupla
 nombre, dia, mes, anio = misDatos #desempaquetar datos
