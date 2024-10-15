@@ -20,15 +20,21 @@ Solución en la siguiente página
 
 '''
 
+# Solicita dos números enteros al usuario
 num1 = int(input("Introduce el primer número: "))
 num2 = int(input("Introduce el segundo número: "))
 
+# Define la función que verifica si un número es primo
 def es_primo(numero):
-    for n in range(2, numero):
-        if numero % n == 0:
+    # Recorre los números desde 2 hasta uno menos del número dado
+    for i in range(max(num1, 2), num2 + 1):
+        if es_primo(i):
+            print(str(i), "es primo")
             return False
-    print(str(numero),"es primo")
-    return True 
+    # Si no encuentra ningún divisor, el número es primo
+    print(str(numero), "es primo")
+    return True
 
-for i in range(num1,num2):
-    es_primo(i)        
+# Recorre los números entre num1 y num2
+for i in range(num1, num2):
+    es_primo(i)       
