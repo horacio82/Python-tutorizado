@@ -1,6 +1,6 @@
 #PILDORAS INFORMÁTICAS
 #Python tutorizado. POO VIII. Vídeo 36/37
-
+#---------------------------------------------------------------------------
 class Persona():
 
     def __init__(self, nombre, apellido, edad):
@@ -30,7 +30,7 @@ class Persona():
 
         return "Estoy comiendo"
     
-
+#---------------------------------------------------------------------------
 class Estudiante(Persona):    
     
     def __init__(self, nombre, apellido, edad, escuela):
@@ -45,6 +45,63 @@ class Estudiante(Persona):
     def estudia(self):
         return "Estoy estudiando"    
     
+#---------------------------------------------------------------------------
+class Trabajador(Persona):
+
+    def __init__(self, nombre, apellido, edad, empresa):
+
+        super().__init__(nombre, apellido, edad)
+
+        self.empresa=empresa
+
+    def getDatosPersonales(self):
+        return super().getDatosPersonales() + " Empresa: " + self.empresa    
+
+    def trabaja(self):
+        return "Estoy trabajando"    
+
+#---------------------------------------------------------------------------
+class Director(Trabajador, Estudiante):
+
+    def __init__(self, nombre, apellido, edad, empresa, escuela):
+        super().__init__(nombre, apellido, edad, empresa)
+
+        self.bonus=bonus
+
+    def getDatosPersonales(self):
+        return super().getDatosPersonales(self) + " Bonus: " + str(self.bonus)
+    
+    def dirige(self):
+        return "Estoy dirigiendo"
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 persona1=Persona("Horacio","Molinari",42)    
 
