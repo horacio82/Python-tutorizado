@@ -35,7 +35,7 @@ class Estudiante(Persona):
     
     def __init__(self, nombre, apellido, edad, escuela):
 
-        super().__init__(nombre, apellido, edad)
+        Persona.__init__(self, nombre, apellido, edad)
 
         self.escuela=escuela
 
@@ -50,7 +50,7 @@ class Trabajador(Persona):
 
     def __init__(self, nombre, apellido, edad, empresa):
 
-        super().__init__(nombre, apellido, edad)
+        Persona.__init__(self, nombre, apellido, edad)
 
         self.empresa=empresa
 
@@ -61,45 +61,21 @@ class Trabajador(Persona):
         return "Estoy trabajando"    
 
 #---------------------------------------------------------------------------
-class Director(Trabajador, Estudiante):
+class Director(Estudiante, Trabajador):
 
-    def __init__(self, nombre, apellido, edad, empresa, escuela):
-        super().__init__(nombre, apellido, edad, empresa)
+    def __init__(self, nombre, apellido, edad, empresa, escuela, bonus):
+        Trabajador.__init__(self, nombre, apellido, edad, empresa)
+        Estudiante.__init__(self, nombre, apellido, edad, escuela)
 
         self.bonus=bonus
 
     def getDatosPersonales(self):
-        return super().getDatosPersonales(self) + " Bonus: " + str(self.bonus)
+        return super().getDatosPersonales() + " Bonus: " + str(self.bonus)
     
     def dirige(self):
         return "Estoy dirigiendo"
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#---------------------------------------------------------------------------
 
 
 
@@ -107,5 +83,13 @@ persona1=Persona("Horacio","Molinari",42)
 
 estudiante1=Estudiante("Juan","Diaz",35, "San Javier")
 
-print(persona1.getDatosPersonales())
-print(estudiante1.getDatosPersonales())
+print("Persona 1 - " + persona1.getDatosPersonales())
+print("Estudiante - " + estudiante1.getDatosPersonales())
+
+print("-------------------------------------------------------------------")
+
+trabajador1=Trabajador("Antonio", "López", 45, "Google")
+print("Trabajador - " + trabajador1.getDatosPersonales())
+
+director1=Director("Marcelo", "Péres", 48, "Microsoft", "San Juan", 90000)
+print("Director - " + director1.getDatosPersonales())
