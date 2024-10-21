@@ -1,5 +1,5 @@
 #PILDORAS INFORMÁTICAS
-#Python tutorizado. Métodos útiles y especiales II. Vídeo 42
+#Python tutorizado. Métodos útiles y especiales II. Vídeo 42/43
 
 class Persona():
 
@@ -19,5 +19,6 @@ class Persona():
 
 
 p1 = Persona(Nombre="Horacio", Apellido="Molinari", Edad=42)
+print(p1)
       
         
