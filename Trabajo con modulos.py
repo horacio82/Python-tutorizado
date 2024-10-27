@@ -4,7 +4,7 @@
 
 #import Funciones_matematicas
 
-from moduloMatematico.Funciones_matematicas import *
+from moduloMatematico.calculosBasicos.Funciones_matematicas import *
 
 sumar(20,15)
 restar(20,10)
