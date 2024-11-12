@@ -1,10 +1,14 @@
 #Pildoras informáticas - Python tutorizado. Crawlers II. Vídeo 50
 #Crawlers III. Vídeo 51 - #Python tutorizado. Crawlers IV. Vídeo 52
 #Python tutorizado. Crawlers V. Vídeo 53 - #Python tutorizado. Crawlers VI. Vídeo 54 - #Python tutorizado. Crawlers VII. Vídeo 55
+#Python tutorizado. Crawlers VIII. Vídeo 56
+
+
 from bs4 import BeautifulSoup
 import requests
 from urllib.parse import urljoin
 import time
+import csv
 
 class PostCrawled():
     def __init__(self, titulo, emoticono, contenido, imagen):
@@ -64,3 +68,15 @@ for elPost in listaPost:
     print()
 
 #print(listaPost)
+
+
+with open('posts.csv', 'w', newline='') as csvfile:
+    postwriter = csv.writer(csvfile, delimiter=' ',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+    for mipost in unPost.extraeinfo():
+        postwriter.writerow([mipost.emiticono, mipost.titulo, mipost.contenido, mipost.imagen])
+    
+
+
+    
