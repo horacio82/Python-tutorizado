@@ -16,7 +16,8 @@ class PostCrawled():
         self.emoticono=emoticono
         self.contenido=contenido
         self.imagen=imagen
-        
+
+    
 class PostExtractor():
 
     def extraeinfo(self):
@@ -70,8 +71,8 @@ for elPost in listaPost:
 #print(listaPost)
 
 
-with open('posts.csv', 'w', newline='') as csvfile:
-    postwriter = csv.writer(csvfile, delimiter=' ',
+with open('posts.csv', 'w', newline='', encoding="utf-8") as csvfile:
+    postwriter = csv.writer(csvfile, delimiter=';',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
     
     for mipost in unPost.extraeinfo():
