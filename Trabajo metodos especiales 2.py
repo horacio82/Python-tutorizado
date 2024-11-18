@@ -34,4 +34,5 @@ agendaPersonal.agregarPersonas("Iván", "1125639874")
 #Se imprime el número de entradas en agendaPersonal, que será 2 en este caso.
 print(len(agendaPersonal))
 
-'''Así que, este código crea una agenda telefónica simple, añade un par de personas a ella y luego imprime la cantidad de personas en la agenda'''
+'''Así que, este código crea una agenda telefónica simple, añade un par de personas a ella 
+y luego imprime la cantidad de personas en la agenda'''
