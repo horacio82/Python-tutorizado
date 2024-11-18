@@ -1,5 +1,6 @@
 #PILDORAS INFORMÁTICAS
 #Python tutorizado. Crawlers IX. Vídeo 57
+
 import csv
 
 with open('posts.csv', 'r', newline='', encoding="utf-8") as csvfile:
