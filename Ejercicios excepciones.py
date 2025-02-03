@@ -3,9 +3,9 @@
 
 nombresPersonas = []
 
-def agregar_a_lista(lista, nombreIntroducido):
+def agregar_a_lista(lista, nombreIntroducido): #Función que añade un nombre a la lista
     try:
-        if nombreIntroducido in lista:
+        if nombreIntroducido in lista: 
             raise ValueError
         else:
             lista.append(nombreIntroducido)
