@@ -1,4 +1,4 @@
-#PILDORAS INFORMATICAS-Python tutorizado. Archivos externos I. Vídeo 60,61
+#PILDORAS INFORMATICAS-Python tutorizado. Archivos externos I, II. Vídeo 60,61
 
 from io import open
 
