@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Interfaces gráficas. Tkinter I, I. Vídeo 64, 65
+#Python tutorizado. Interfaces gráficas. Tkinter I,II. Vídeo 64, 65
 
 from tkinter import *
 
