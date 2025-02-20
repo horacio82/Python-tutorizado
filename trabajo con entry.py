@@ -1,7 +1,10 @@
 #PILDORAS INFORMATICAS  
-#Python tutorizado. Interfaces gráficas. Tkinter IV, V Vídeo 67, 68
+#Python tutorizado. Interfaces gráficas. Tkinter IV, , VI Vídeo 67, 68, 69
 
 from tkinter import *
+
+from tkinter import messagebox as MessageBox
+
 
 # Crear la ventana principal
 raiz = Tk()
@@ -10,8 +13,10 @@ raiz = Tk()
 miFrame = Frame=Frame(raiz, width=1000, height=550)
 miFrame.pack()
 
-# Cuadros de texto
-cuadroTextoNombre = Entry(miFrame)
+miVariable = StringVar() # Variable de control para los radiobuttons
+
+# Cuadros de texto---------------------------------------
+cuadroTextoNombre = Entry(miFrame, textvariable=miVariable)
 cuadroTextoNombre.grid(row=0, column=1, padx=15, pady=15)
 cuadroTextoNombre.config(fg="red", justify="center")
 
@@ -30,6 +35,11 @@ cuadroTextoMail.grid(row=4, column=1, padx=15, pady=15)
 
 cuadroTextoOpiniones = Text(miFrame, width=15, height=10)
 cuadroTextoOpiniones.grid(row=5, column=1, padx=15, pady=15)
+
+# Scrollbar-----------------------------------------------
+miScrollVertical = Scrollbar(miFrame, command=cuadroTextoOpiniones.yview)
+miScrollVertical.grid(row=5, column=2, sticky="nsew")
+cuadroTextoOpiniones.config(yscrollcommand=miScrollVertical.set) # Asociar el scroll con el cuadro de texto
 
 # Etiquetas------------------------------------------------
 nombreLabelNombre = Label(miFrame, text="Nombre:")
@@ -50,8 +60,14 @@ nombreLabelMail.grid(row=4, column=0, sticky="w")
 nombreLabelComentarios = Label(miFrame, text="Comentarios:")
 nombreLabelComentarios.grid(row=5, column=0, sticky="w")
 
-# Botón
-botonEnviar = Button(raiz, text="Enviar")
+
+def funcionBoton():
+    
+    #MessageBox.showinfo("Saludo", "Hola desde Tkinter ")
+    miVariable.set("Horacio")
+
+# Botón---------------------------------------------------
+botonEnviar = Button(raiz, text="Enviar", command=funcionBoton)
 botonEnviar.pack()
 
 
