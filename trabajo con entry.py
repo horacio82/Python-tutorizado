@@ -1,9 +1,10 @@
 #PILDORAS INFORMATICAS  
-#Python tutorizado. Interfaces gráficas. Tkinter IV, , VI Vídeo 67, 68, 69
+#Python tutorizado. Interfaces gráficas. Tkinter IV, , VI, VII Vídeo 67, 68, 69, 70
 
 from tkinter import *
 
-from tkinter import messagebox as MessageBox
+# Importar el módulo messagebox
+from tkinter import messagebox as msg
 
 
 # Crear la ventana principal
@@ -60,11 +61,11 @@ nombreLabelMail.grid(row=4, column=0, sticky="w")
 nombreLabelComentarios = Label(miFrame, text="Comentarios:")
 nombreLabelComentarios.grid(row=5, column=0, sticky="w")
 
-
+#-----------------------------------------------------------
 def funcionBoton():
     
-    #MessageBox.showinfo("Saludo", "Hola desde Tkinter ")
-    miVariable.set("Horacio")
+   msg.showinfo("Información rescatada", cuadroTextoNombre.get() + " " + cuadroTextoApellido.get() + " " + cuadroTextoContra.get() + " " + cuadroTextoDireccion.get() + " " + cuadroTextoMail.get() + " " + cuadroTextoOpiniones.get("1.0", END))
+    
 
 # Botón---------------------------------------------------
 botonEnviar = Button(raiz, text="Enviar", command=funcionBoton)
