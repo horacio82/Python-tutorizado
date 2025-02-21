@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora I, II. Vídeo 71, 72
+#Python tutorizado. Práctica guiada. Calculadora I, II, III. Vídeo 71, 72,73
 
 from tkinter import *
 
@@ -7,6 +7,9 @@ from tkinter import *
 raiz=Tk() #ventana
 miFrame = Frame(raiz) #frame
 miFrame.pack() #empaquetamos el frame
+
+operacion = "" #variable para la operación
+resultado = 0 #variable para el resultado
 
 digitoDisplay = StringVar() #variable para la pantalla
 
@@ -16,7 +19,36 @@ display.config(bg="black", fg="#03f943", justify="right", width=15) #configuramo
 
 #pulsaciones números---------------------------------------
 def pulsacionesTeclas(numPulsado):
-    digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número 7 a la pantalla
+
+    global operacion
+    if operacion!= "": #si hay una operación
+        digitoDisplay.set(numPulsado) #mostramos el número pulsado
+        operacion = ""
+    else:
+        digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número pulsado a la pantalla
+
+        
+        
+
+
+#función suma------------------------------------------------
+def suma(num):
+    global operacion   
+    global resultado
+
+    resultado+=int(num)
+
+    operacion = "suma" #definimos la operación
+
+    digitoDisplay.set(resultado) #mostramos el resultado en la pantalla
+    
+
+#funcion total------------------------------------------------
+def total():
+    global resultado
+
+    digitoDisplay.set(resultado+int(digitoDisplay.get())) 
+    resultado=0 #reiniciamos el resultado    
 
 #botones de la primera fila-----------------------
 boton7=Button(miFrame, text="7", width=3, command=lambda:pulsacionesTeclas("7")) #creamos el botón 7
@@ -53,9 +85,9 @@ boton0=Button(miFrame, text="0", width=3, command=lambda:pulsacionesTeclas("0"))
 boton0.grid(row=5, column=1)
 botonComa=Button(miFrame, text=",", width=3, command=lambda:pulsacionesTeclas("."))
 botonComa.grid(row=5, column=2)
-botonIgual=Button(miFrame, text="=", width=3)
+botonIgual=Button(miFrame, text="=", width=3, command=lambda:total())
 botonIgual.grid(row=5, column=3)
-botonSum=Button(miFrame, text="+", width=3)
+botonSum=Button(miFrame, text="+", width=3, command=lambda:suma(digitoDisplay.get()))
 botonSum.grid(row=5, column=4)
 
 
