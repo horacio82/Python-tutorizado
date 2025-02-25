@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora I, II, III,IV. Vídeo 71, 72,73, 74
+#Python tutorizado. Práctica guiada. Calculadora I, II, III,IV, V. Vídeo 71, 72,73, 74, 75
 
 from tkinter import *
 
@@ -10,6 +10,7 @@ miFrame.pack() #empaquetamos el frame
 
 operacion = "" #variable para la operación
 resultado = 0 #variable para el resultado
+coma=False #variable para la coma
 
 digitoDisplay = StringVar() #variable para la pantalla
 
@@ -22,7 +23,13 @@ digitoDisplay.set("0") #valor inicial de la pantalla
 #pulsaciones números---------------------------------------
 def pulsacionesTeclas(numPulsado):
 
+    
+
     global operacion
+
+    global coma
+
+
     if operacion!= "": #si hay una operación
         digitoDisplay.set(numPulsado) #mostramos el número pulsado
         operacion = ""
@@ -34,12 +41,17 @@ def pulsacionesTeclas(numPulsado):
 
         elif numPulsado=="." and digitoDisplay.get()=="0": #si el número pulsado es un punto y en la pantalla hay un 
             digitoDisplay.set(digitoDisplay.get() + numPulsado)      
+            
         elif numPulsado!="0" and digitoDisplay.get()=="0": #si el número pulsado es diferente de 0 y en la pantalla hay un 0
             digitoDisplay.set(numPulsado) #mostramos el número pulsado
            
-        else:
-            digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número pulsado a la pantalla
+        elif numPulsado=="." and coma==False: #si el número pulsado es un punto y no hay una coma
+            coma=True #ponemos la coma a True
 
+        elif numPulsado!="." and coma==True: #si el número pulsado es un punto y hay una coma
+            digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número pulsado a la pantalla
+        elif numPulsado!="." and coma==False:
+            digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número pulsado a la pantalla
         
         
 
