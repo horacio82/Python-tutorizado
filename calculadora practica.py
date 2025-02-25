@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora I, II, III. Vídeo 71, 72,73
+#Python tutorizado. Práctica guiada. Calculadora I, II, III,IV. Vídeo 71, 72,73, 74
 
 from tkinter import *
 
@@ -17,6 +17,8 @@ display=Entry(miFrame, textvariable=digitoDisplay, font="Tahoma 15") #pantalla
 display.grid(row=1, column=1, columnspan=4, pady=10,) #ubicamos la pantalla en el frame    
 display.config(bg="black", fg="#03f943", justify="right", width=15) #configuramos la pantalla
 
+digitoDisplay.set("0") #valor inicial de la pantalla
+
 #pulsaciones números---------------------------------------
 def pulsacionesTeclas(numPulsado):
 
@@ -24,8 +26,19 @@ def pulsacionesTeclas(numPulsado):
     if operacion!= "": #si hay una operación
         digitoDisplay.set(numPulsado) #mostramos el número pulsado
         operacion = ""
+
     else:
-        digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número pulsado a la pantalla
+
+        if numPulsado=="0" and digitoDisplay.get()=="0": #si el número pulsado es 0 y en la pantalla hay un 0
+            digitoDisplay.set("0") #mostramos un 0
+
+        elif numPulsado=="." and digitoDisplay.get()=="0": #si el número pulsado es un punto y en la pantalla hay un 
+            digitoDisplay.set(digitoDisplay.get() + numPulsado)      
+        elif numPulsado!="0" and digitoDisplay.get()=="0": #si el número pulsado es diferente de 0 y en la pantalla hay un 0
+            digitoDisplay.set(numPulsado) #mostramos el número pulsado
+           
+        else:
+            digitoDisplay.set(digitoDisplay.get() + numPulsado) #añadimos el número pulsado a la pantalla
 
         
         
