@@ -1,5 +1,6 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora I, II, III,IV, V. Vídeo 71, 72,73, 74, 75
+#Python tutorizado. Práctica guiada. Calculadora I, II, III,IV, V, VI, VII. Vídeo 71, 72,
+# 73, 74, 75, 76, 77
 
 from tkinter import *
 
@@ -19,6 +20,21 @@ display.grid(row=1, column=1, columnspan=4, pady=10,) #ubicamos la pantalla en e
 display.config(bg="black", fg="#03f943", justify="right", width=15) #configuramos la pantalla
 
 digitoDisplay.set("0") #valor inicial de la pantalla
+
+#FUNCIÓN ALTERNATIVA PARA COMA---------------------------------------
+def pulsacion_coma():
+
+    contador=0
+
+    for i in digitoDisplay.get():
+
+        if i==".":
+            contador+=1
+
+    if contador==0:
+        digitoDisplay.set(digitoDisplay.get() + ".")            
+
+
 
 #pulsaciones números---------------------------------------
 def pulsacionesTeclas(numPulsado):
@@ -61,19 +77,29 @@ def suma(num):
     global operacion   
     global resultado
 
-    resultado+=int(num)
+    resultado+=float(num)
 
-    operacion = "suma" #definimos la operación
+    if resultado.is_integer():
+        digitoDisplay.set(int(resultado))    
 
-    digitoDisplay.set(resultado) #mostramos el resultado en la pantalla
+        operacion = "suma" #definimos la operación
+
+    else:
+        operacion = "suma" #definimos la operación
+        digitoDisplay.set(resultado) #mostramos el resultado en la pantalla
     
 
 #funcion total------------------------------------------------
 def total():
     global resultado
 
-    digitoDisplay.set(resultado+int(digitoDisplay.get())) 
-    resultado=0 #reiniciamos el resultado    
+    if resultado+float(digitoDisplay.get()).is_integer():
+        digitoDisplay.set(int(resultado+float(digitoDisplay.get()))) #mostramos el resultado en la pantalla
+        resultado=0 #reiniciamos el resultado
+    else:
+
+        digitoDisplay.set(resultado+float(digitoDisplay.get())) 
+        resultado=0 #reiniciamos el resultado    
 
 #botones de la primera fila-----------------------
 boton7=Button(miFrame, text="7", width=3, command=lambda:pulsacionesTeclas("7")) #creamos el botón 7
@@ -108,7 +134,7 @@ botonRest.grid(row=4, column=4)
 #botones de la cuarta fila-----------------------
 boton0=Button(miFrame, text="0", width=3, command=lambda:pulsacionesTeclas("0"))
 boton0.grid(row=5, column=1)
-botonComa=Button(miFrame, text=",", width=3, command=lambda:pulsacionesTeclas("."))
+botonComa=Button(miFrame, text=",", width=3, command=lambda:pulsacion_coma())
 botonComa.grid(row=5, column=2)
 botonIgual=Button(miFrame, text="=", width=3, command=lambda:total())
 botonIgual.grid(row=5, column=3)
