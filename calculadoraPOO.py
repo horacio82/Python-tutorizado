@@ -2,6 +2,7 @@
 #Python tutorizado. Práctica guiada. Calculadora POO, II, III. Vídeo 78, 79, 80
 
 from tkinter import *
+import re
 
 raiz = Tk() #creamos la ventana
 
@@ -29,7 +30,8 @@ class Calculadora:
         boton4 = self.colocar_boton(4)
         boton5 = self.colocar_boton(5)
         boton6 = self.colocar_boton(6)
-        boton_mult = self.colocar_boton('*')
+        boton_mult = self.colocar_boton(u"\u00D7") #u"\u00D7" es el código unicode para el símbolo de multiplicación    
+        #boton_mult.config(text="x")
         #------------------------------------------------------------
         boton1 = self.colocar_boton(1)
         boton2 = self.colocar_boton(2)
@@ -60,6 +62,7 @@ class Calculadora:
             self.operacion+=str(valor) 
             self.mostrar_pantalla(valor) 
         elif not mostrar and valor=="=":
+            self.operacion = re.sub(u"\u00D7", "*", self.operacion) #reemplazamos el símbolo de multiplicación por el asterisco
             self.borrar_pantalla()
             self.mostrar_pantalla(str(eval(self.operacion)))    
         else:
