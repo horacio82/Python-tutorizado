@@ -4,7 +4,7 @@
 from tkinter import *
 import re
 
-from botonera_calculadora import *
+from moduloCalculadoras.botonera_calculadora import *
 
 
 raiz = Tk() #creamos la ventana

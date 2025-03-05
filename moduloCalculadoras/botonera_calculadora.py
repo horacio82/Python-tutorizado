@@ -4,7 +4,7 @@
 from tkinter import *
 import re
 
-from operaciones_calculadora import *
+from moduloCalculadoras.operaciones_calculadora import *
 
 contador = 0
 
