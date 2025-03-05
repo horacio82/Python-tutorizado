@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora POO V. Vídeo 82
+#Python tutorizado. Práctica guiada. Calculadora POO V, VI Vídeo 82, 83
 
 from tkinter import *
 import re

@@ -4,6 +4,8 @@
 from tkinter import *
 import re
 
+from operaciones_calculadora import *
+
 contador = 0
 
 
@@ -16,4 +18,5 @@ def construir_botones(self, botones, filas_botones):
 
 
 def colocar_boton(self, valor, mostrar=True, ancho=9, alto=1):   
-    return Button(self.ventana, text=valor, width=ancho, height=alto, font="Tahoma 15", command=lambda:self.pulsaciones_teclas(valor, mostrar))         
+    return Button(self.ventana, text=valor, width=ancho, height=alto, font="Tahoma 15", command=lambda:pulsaciones_teclas(self, valor, mostrar))   
+          
