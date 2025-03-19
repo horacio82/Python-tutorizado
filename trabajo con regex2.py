@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Expresiones regulares II, III. Vídeo 86, 87
+#Python tutorizado. Expresiones regulares II, III, IV . Vídeo 86, 87, 88
 
 import re
 
@@ -75,3 +75,25 @@ print('---------------------------------------------')
 for codigo in lista_codigos:
     if re.findall('Ma[.:]',codigo): #Busca Ma. o Ma:
         print(codigo)
+
+print('---------------------------------------------')
+
+nombre = 'Jara Lopez'
+nombre2 = 'Antonio Gomez'
+nombre3 = 'Lara Lopez'
+
+if re.match('.ara',nombre, re.IGNORECASE): #Busca palabras que empiecen por cualquier letra y terminen por ara
+    print("He encontrado a la persona",nombre)
+else:
+    print("No he encontrado a la persona",nombre)    
+
+print('---------------------------------------------')
+
+codigo1 = 'Ma1'
+codigo2 = 'Se1'
+codigo3 = 'Ma2'
+
+if re.search('Ma1',codigo1): #Busca Ma1
+    print("He encontrado el código",codigo1)
+else:
+    print("No he encontrado el código",codigo1)    
