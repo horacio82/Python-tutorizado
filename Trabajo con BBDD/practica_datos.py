@@ -19,6 +19,6 @@ mi_conexion.commit() # Guardar los cambios en la base de datos
 
 
 
-
+mi_cursor.close() # Cerrar el cursor
 
 mi_conexion.close() # Cerrar la conexión a la base de datos
