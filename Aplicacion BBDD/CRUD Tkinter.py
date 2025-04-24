@@ -61,5 +61,45 @@ scrollVert.grid(row=5, column=2, sticky="nsew") # Colocamos la barra de desplaza
 textoComentarios.config(yscrollcommand=scrollVert.set) # Configuramos la barra de desplazamiento para que funcione con el campo de texto
 
 
+#-------------------------------Etiquetas----------------------------------
+# Creamos etiquetas para los campos de entrada
+idLabel=Label(miFrame, text="Id:") # Creamos una etiqueta para el ID
+idLabel.grid(row=0, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+nombreLabel=Label(miFrame, text="Nombre:") # Creamos una etiqueta para el nombre
+nombreLabel.grid(row=1, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+passLabel=Label(miFrame, text="Contraseña:") # Creamos una etiqueta para la contraseña
+passLabel.grid(row=2, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+apellidoLabel=Label(miFrame, text="Apellidos:") # Creamos una etiqueta para los apellidos
+apellidoLabel.grid(row=3, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+direccionLabel=Label(miFrame, text="Dirección:") # Creamos una etiqueta para la dirección
+direccionLabel.grid(row=4, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+comentariosLabel=Label(miFrame, text="Comentarios:") # Creamos una etiqueta para los comentarios
+comentariosLabel.grid(row=5, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+#-------------------------------Botones----------------------------------
+# Creamos botones para las operaciones CRUD
+miFrameBotones=Frame(root) # Creamos un marco para los botones
+miFrameBotones.pack() # Añadimos el marco a la ventana principal
+
+botonCrear=Button(miFrameBotones, text="Crear", command=lambda:crear()) # Creamos un botón para crear datos
+botonCrear.grid(row=1, column=0, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
+
+botonLeer=Button(miFrameBotones, text="Leer", command=lambda:leer()) # Creamos un botón para leer datos
+botonLeer.grid(row=1, column=1, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
+
+botonActualizar=Button(miFrameBotones, text="Actualizar", command=lambda:actualizar()) # Creamos un botón para actualizar datos
+botonActualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
+
+botonBorrar=Button(miFrameBotones, text="Borrar", command=lambda:borrar()) # Creamos un botón para borrar datos
+botonBorrar.grid(row=1, column=3, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
+
+
+
+
 
 root.mainloop() # Iniciamos el bucle principal de la aplicación
