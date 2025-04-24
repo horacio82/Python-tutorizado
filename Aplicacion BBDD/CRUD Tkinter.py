@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. BBDD. Aplicación gráfica CRUD II. Vídeo 100
+#Python tutorizado. BBDD. Aplicación gráfica CRUD I, II, III, IV. Vídeo 99, 100, 101, 102
 
 from tkinter import * # Importamos la librería tkinter para crear la interfaz gráfica
 from tkinter import messagebox # Importamos la librería messagebox para mostrar mensajes emergentes
@@ -37,6 +37,28 @@ barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu) # Añadimos el menú de ayu
 # Creamos etiquetas y campos de entrada para los datos
 miFrame=Frame(root) # Creamos un marco para organizar los widgets
 miFrame.pack() # Añadimos el marco a la ventana principal
+
+cuadroId=Entry(miFrame) # Creamos un campo de entrada para el ID
+cuadroId.grid(row=0, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+
+cuadroNombre=Entry(miFrame) # Creamos un campo de entrada para el nombre
+cuadroNombre.grid(row=1, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+cuadroNombre.config(fg="blue", justify="center") # Configuramos el color y la alineación del texto en el campo de entrada
+
+cuadroPass=Entry(miFrame) # Creamos un campo de entrada para la contraseña
+cuadroPass.grid(row=2, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+cuadroPass.config(show="*") # Configuramos el campo para ocultar la contraseña
+
+cuadroApellidos=Entry(miFrame) # Creamos un campo de entrada para los apellidos
+cuadroApellidos.grid(row=3, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+
+cuadroDireccion=Entry(miFrame) # Creamos un campo de entrada para la dirección
+cuadroDireccion.grid(row=4, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+textoComentarios=Text(miFrame, width=16, height=5) # Creamos un campo de texto para comentarios
+textoComentarios.grid(row=5, column=1, padx=10, pady=10) # Colocamos el campo de texto en la cuadrícula
+scrollVert=Scrollbar(miFrame, command=textoComentarios.yview) # Creamos una barra de desplazamiento vertical para el campo de texto
+scrollVert.grid(row=5, column=2, sticky="nsew") # Colocamos la barra de desplazamiento en la cuadrícula
+textoComentarios.config(yscrollcommand=scrollVert.set) # Configuramos la barra de desplazamiento para que funcione con el campo de texto
 
 
 
