@@ -54,10 +54,13 @@ cuadroApellidos.grid(row=3, column=1, padx=10, pady=10) # Colocamos el campo en 
 
 cuadroDireccion=Entry(miFrame) # Creamos un campo de entrada para la dirección
 cuadroDireccion.grid(row=4, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+
 textoComentarios=Text(miFrame, width=16, height=5) # Creamos un campo de texto para comentarios
 textoComentarios.grid(row=5, column=1, padx=10, pady=10) # Colocamos el campo de texto en la cuadrícula
+
 scrollVert=Scrollbar(miFrame, command=textoComentarios.yview) # Creamos una barra de desplazamiento vertical para el campo de texto
 scrollVert.grid(row=5, column=2, sticky="nsew") # Colocamos la barra de desplazamiento en la cuadrícula
+
 textoComentarios.config(yscrollcommand=scrollVert.set) # Configuramos la barra de desplazamiento para que funcione con el campo de texto
 
 
