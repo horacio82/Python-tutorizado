@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. BBDD. Aplicación gráfica CRUD I, II, III, IV. Vídeo 99, 100, 101, 102
+#Python tutorizado. BBDD. Aplicación gráfica CRUD I, II, III, IV,V. Vídeo 99, 100, 101, 102, 103
 
 from tkinter import * # Importamos la librería tkinter para crear la interfaz gráfica
 from tkinter import messagebox # Importamos la librería messagebox para mostrar mensajes emergentes
@@ -7,11 +7,40 @@ import sqlite3 # Importamos la librería sqlite3 para trabajar con bases de dato
 
 root=Tk() # Creamos la ventana principal de la aplicación
 
+#-------------------------------conección a la base de datos------------------
+def conectarBBDD():
+    miConexion = sqlite3.connect("Aplicacion BBDD/NegocioUsuarios")
+    miCursor = miConexion.cursor()
+
+    try:
+        miCursor.execute('''
+            CREATE TABLE DATOSUSUARIOS(
+                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                NOMBRE VARCHAR(50),
+                APELLIDO VARCHAR(50),
+                DIRECCION VARCHAR(70),
+                COMENTARIOS VARCHAR(120)
+            )
+        ''')
+        messagebox.showinfo("BBDD", "Base de datos creada con éxito")
+
+    except sqlite3.OperationalError:
+        messagebox.showwarning("BBDD", "La base de datos ya existe")
+
+    #miConexion.commit()  # Confirma los cambios en la base de datos
+    #miConexion.close()  # Cierra la conexión
+    
+def salir():
+    valor=messagebox.askquestion("Salir", "¿Quieres salir de la aplicación?") # Pregunta al usuario si quiere salir de la aplicación
+    if valor=="yes":
+        root.destroy() # Cierra la ventana principal y termina la aplicación
+
+
 barraMenu=Menu(root) # Creamos una barra de menú
 root.config(menu=barraMenu, width=300, height=300) # Configuramos la ventana principal para que use la barra de menú
 
 bbddMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para la base de datos
-bbddMenu.add_command(label="Conectar", command=lambda:conectar()) # Añadimos una opción para conectar a la base de datos
+bbddMenu.add_command(label="Conectar", command=lambda:conectarBBDD()) # Añadimos una opción para conectar a la base de datos
 bbddMenu.add_command(label="Salir", command=lambda:salir())
 
 borrarMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para borrar datos
