@@ -1,5 +1,6 @@
-#PILDORAS INFORMATICAS
-#Python tutorizado. BBDD. Aplicación gráfica CRUD I, II, III, IV,V. Vídeo 99, 100, 101, 102, 103
+# PILDORAS INFORMATICAS
+# Python tutorizado. BBDD. Aplicación gráfica CRUD I, II, III, IV,V, VI. 
+# Vídeo 99, 100, 101, 102, 103, 104
 
 from tkinter import * # Importamos la librería tkinter para crear la interfaz gráfica
 from tkinter import messagebox # Importamos la librería messagebox para mostrar mensajes emergentes
@@ -7,54 +8,24 @@ import sqlite3 # Importamos la librería sqlite3 para trabajar con bases de dato
 
 root=Tk() # Creamos la ventana principal de la aplicación
 
-#-------------------------------conección a la base de datos------------------
-def conectarBBDD():
-    miConexion = sqlite3.connect("Aplicacion BBDD/NegocioUsuarios")
-    miCursor = miConexion.cursor()
-
-    try:
-        miCursor.execute('''
-            CREATE TABLE DATOSUSUARIOS(
-                ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                NOMBRE VARCHAR(50),
-                APELLIDO VARCHAR(50),
-                DIRECCION VARCHAR(70),
-                COMENTARIOS VARCHAR(120)
-            )
-        ''')
-        messagebox.showinfo("BBDD", "Base de datos creada con éxito")
-
-    except sqlite3.OperationalError:
-        messagebox.showwarning("BBDD", "La base de datos ya existe")
-
-    #miConexion.commit()  # Confirma los cambios en la base de datos
-    #miConexion.close()  # Cierra la conexión
-    
-def salir():
-    valor=messagebox.askquestion("Salir", "¿Quieres salir de la aplicación?") # Pregunta al usuario si quiere salir de la aplicación
-    if valor=="yes":
-        root.destroy() # Cierra la ventana principal y termina la aplicación
-
-
-barraMenu=Menu(root) # Creamos una barra de menú
+barraMenu=Menu(root) # Creamos una barra de menú en la ventana principal
 root.config(menu=barraMenu, width=300, height=300) # Configuramos la ventana principal para que use la barra de menú
 
 bbddMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para la base de datos
-bbddMenu.add_command(label="Conectar", command=lambda:conectarBBDD()) # Añadimos una opción para conectar a la base de datos
-bbddMenu.add_command(label="Salir", command=lambda:salir())
+bbddMenu.add_command(label="Conectar") # Añadimos una opción al menú para conectar a la base de datos
+bbddMenu.add_command(label="Salir") # Añadimos una opción al menú para desconectar de la base de datos
 
-borrarMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para borrar datos
-borrarMenu.add_command(label="Borrar", command=lambda:borrar()) # Añadimos una opción para borrar datos
+borrarMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para borrar registros
+borrarMenu.add_command(label="Borrar") # Añadimos una opción al menú para borrar registros
 
 crudMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para operaciones CRUD
-crudMenu.add_command(label="Crear", command=lambda:crear()) # Añadimos una opción para crear datos
-crudMenu.add_command(label="Leer", command=lambda:leer()) # Añadimos una opción para leer datos
-crudMenu.add_command(label="Actualizar", command=lambda:actualizar()) # Añadimos una opción para actualizar datos
-crudMenu.add_command(label="Eliminar", command=lambda:eliminar()) # Añadimos una opción para eliminar datos
-
+crudMenu.add_command(label="Crear") # Añadimos una opción al menú para crear registros
+crudMenu.add_command(label="Leer") # Añadimos una opción al menú para leer registros
+crudMenu.add_command(label="Actualizar") # Añadimos una opción al menú para actualizar registros
+crudMenu.add_command(label="Borrar") # Añadimos una opción al menú para eliminar registros
 ayudaMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para ayuda
-ayudaMenu.add_command(label="Licencia", command=lambda:acercaDe()) # Añadimos una opción para mostrar información sobre la aplicación
-ayudaMenu.add_command(label="Acerca de", command=lambda:acercaDe()) # Añadimos una opción para mostrar información sobre la aplicación
+ayudaMenu.add_command(label="Licencia") # Añadimos una opción al menú para mostrar ayuda
+ayudaMenu.add_command(label="Acerca de...") # Añadimos una opción al menú para mostrar información sobre la aplicación
 
 barraMenu.add_cascade(label="BBDD", menu=bbddMenu) # Añadimos el menú de base de datos a la barra de menú
 barraMenu.add_cascade(label="Borrar", menu=borrarMenu) # Añadimos el menú de borrar a la barra de menú
@@ -62,72 +33,71 @@ barraMenu.add_cascade(label="CRUD", menu=crudMenu) # Añadimos el menú CRUD a l
 barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu) # Añadimos el menú de ayuda a la barra de menú
 
 
-#------------------------------contruccioón de campos grid------------------
-# Creamos etiquetas y campos de entrada para los datos
-miFrame=Frame(root) # Creamos un marco para organizar los widgets
+#-------------------------construccón de campos grid-------------------------
+
+miFrame=Frame(root) # Creamos un marco (frame) para organizar los widgets
 miFrame.pack() # Añadimos el marco a la ventana principal
 
 cuadroId=Entry(miFrame) # Creamos un campo de entrada para el ID
-cuadroId.grid(row=0, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+cuadroId.grid(row=0, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 
 cuadroNombre=Entry(miFrame) # Creamos un campo de entrada para el nombre
-cuadroNombre.grid(row=1, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
-cuadroNombre.config(fg="blue", justify="center") # Configuramos el color y la alineación del texto en el campo de entrada
+cuadroNombre.grid(row=1, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
+cuadroNombre.config(fg="blue", justify="right") # Configuramos el color y la alineación del texto en el campo de entrada
 
 cuadroPass=Entry(miFrame) # Creamos un campo de entrada para la contraseña
-cuadroPass.grid(row=2, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
-cuadroPass.config(show="*") # Configuramos el campo para ocultar la contraseña
+cuadroPass.grid(row=2, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
+cuadroPass.config(show="*") # Configuramos el campo de entrada para ocultar la contraseña
 
-cuadroApellidos=Entry(miFrame) # Creamos un campo de entrada para los apellidos
-cuadroApellidos.grid(row=3, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+cuadroApellido=Entry(miFrame) # Creamos un campo de entrada para el apellido
+cuadroApellido.grid(row=3, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 
 cuadroDireccion=Entry(miFrame) # Creamos un campo de entrada para la dirección
-cuadroDireccion.grid(row=4, column=1, padx=10, pady=10) # Colocamos el campo en la cuadrícula
+cuadroDireccion.grid(row=4, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 
-textoComentarios=Text(miFrame, width=16, height=5) # Creamos un campo de texto para comentarios
-textoComentarios.grid(row=5, column=1, padx=10, pady=10) # Colocamos el campo de texto en la cuadrícula
-
-scrollVert=Scrollbar(miFrame, command=textoComentarios.yview) # Creamos una barra de desplazamiento vertical para el campo de texto
+textoComentario=Text(miFrame, width=16, height=5) # Creamos un campo de texto para comentarios
+textoComentario.grid(row=5, column=1, padx=10, pady=10) # Colocamos el campo de texto en la cuadrícula
+scrollVert=Scrollbar(miFrame, command=textoComentario.yview) # Creamos una barra de desplazamiento vertical para el campo de texto
 scrollVert.grid(row=5, column=2, sticky="nsew") # Colocamos la barra de desplazamiento en la cuadrícula
+textoComentario.config(yscrollcommand=scrollVert.set) # Configuramos el campo de texto para usar la barra de desplazamiento
 
-textoComentarios.config(yscrollcommand=scrollVert.set) # Configuramos la barra de desplazamiento para que funcione con el campo de texto
+
+#-------------------------construcción de etiquetas-------------------------
+
+etiquetaId=Label(miFrame, text="Id:") # Creamos una etiqueta para el ID
+etiquetaId.grid(row=0, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+etiquetaNombre=Label(miFrame, text="Nombre:") # Creamos una etiqueta para el nombre
+etiquetaNombre.grid(row=1, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+etiquetaPass=Label(miFrame, text="Contraseña:") # Creamos una etiqueta para la contraseña
+etiquetaPass.grid(row=2, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+etiquetaApellido=Label(miFrame, text="Apellido:") # Creamos una etiqueta para el apellido
+etiquetaApellido.grid(row=3, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+etiquetaDireccion=Label(miFrame, text="Dirección:") # Creamos una etiqueta para la dirección
+etiquetaApellido.grid(row=4, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+
+etiquetaComentario=Label(miFrame, text="Comentarios:") # Creamos una etiqueta para los comentarios  
+etiquetaComentario.grid(row=5, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
 
 
-#-------------------------------Etiquetas----------------------------------
-# Creamos etiquetas para los campos de entrada
-idLabel=Label(miFrame, text="Id:") # Creamos una etiqueta para el ID
-idLabel.grid(row=0, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+#-------------------------construcción de botones-------------------------
 
-nombreLabel=Label(miFrame, text="Nombre:") # Creamos una etiqueta para el nombre
-nombreLabel.grid(row=1, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
-
-passLabel=Label(miFrame, text="Contraseña:") # Creamos una etiqueta para la contraseña
-passLabel.grid(row=2, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
-
-apellidoLabel=Label(miFrame, text="Apellidos:") # Creamos una etiqueta para los apellidos
-apellidoLabel.grid(row=3, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
-
-direccionLabel=Label(miFrame, text="Dirección:") # Creamos una etiqueta para la dirección
-direccionLabel.grid(row=4, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
-
-comentariosLabel=Label(miFrame, text="Comentarios:") # Creamos una etiqueta para los comentarios
-comentariosLabel.grid(row=5, column=0, sticky="e", padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
-
-#-------------------------------Botones----------------------------------
-# Creamos botones para las operaciones CRUD
-miFrameBotones=Frame(root) # Creamos un marco para los botones
+miFrameBotones=Frame(root) # Creamos un marco (frame) para los botones
 miFrameBotones.pack() # Añadimos el marco a la ventana principal
 
-botonCrear=Button(miFrameBotones, text="Crear", command=lambda:crear()) # Creamos un botón para crear datos
+botonCrear=Button(miFrameBotones, text="Crear") # Creamos un botón para crear registros
 botonCrear.grid(row=1, column=0, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
 
-botonLeer=Button(miFrameBotones, text="Leer", command=lambda:leer()) # Creamos un botón para leer datos
+botonLeer=Button(miFrameBotones, text="Leer") # Creamos un botón para leer registros
 botonLeer.grid(row=1, column=1, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
 
-botonActualizar=Button(miFrameBotones, text="Actualizar", command=lambda:actualizar()) # Creamos un botón para actualizar datos
+botonActualizar=Button(miFrameBotones, text="Actualizar") # Creamos un botón para actualizar registros
 botonActualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
 
-botonBorrar=Button(miFrameBotones, text="Borrar", command=lambda:borrar()) # Creamos un botón para borrar datos
+botonBorrar=Button(miFrameBotones, text="Borrar") # Creamos un botón para borrar registros
 botonBorrar.grid(row=1, column=3, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
 
 
