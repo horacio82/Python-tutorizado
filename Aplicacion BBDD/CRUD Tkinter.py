@@ -8,12 +8,48 @@ import sqlite3 # Importamos la librería sqlite3 para trabajar con bases de dato
 
 root=Tk() # Creamos la ventana principal de la aplicación
 
+#-------------------------conexión a la base de datos-------------------------
+
+def conectarBBDD(): # Definimos la función para conectar a la base de datos
+
+    miConexion=sqlite3.connect("Aplicacion BBDD/NegocioUsuarios") # Conectamos a la base de 
+    
+    miCursor=miConexion.cursor() # Creamos un cursor para ejecutar comandos SQL
+
+
+    try: # Intentamos crear la tabla
+        miCursor.execute('''
+                     
+            CREATE TABLE DATOSUSUARIOS(
+                     
+                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                NOMBRE VARCHAR(50),
+                PASSWORD VARCHAR(50),
+                APELLIDO VARCHAR(50),
+                DIRECCION VARCHAR(70),
+                COMENTARIOS VARCHAR(120)
+            )
+                     
+    ''')         
+
+        messagebox.showinfo("BBDD", "Base de datos creada con éxito") # Mostramos un mensaje de éxito al crear la base de datos        
+    except:
+        messagebox.showwarning("BBDD", "La base de datos ya existe")
+
+def salirAplicacion(): # Definimos la función para salir de la aplicación
+
+    valor_salir=messagebox.askquestion("Salir", "¿Quieres salir de la aplicación?") # 
+    if valor_salir=="yes":
+        root.destroy() # Si el usuario confirma, cerramos la aplicación
+   
+
+
 barraMenu=Menu(root) # Creamos una barra de menú en la ventana principal
 root.config(menu=barraMenu, width=300, height=300) # Configuramos la ventana principal para que use la barra de menú
 
 bbddMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para la base de datos
-bbddMenu.add_command(label="Conectar") # Añadimos una opción al menú para conectar a la base de datos
-bbddMenu.add_command(label="Salir") # Añadimos una opción al menú para desconectar de la base de datos
+bbddMenu.add_command(label="Conectar", command=conectarBBDD) # Añadimos una opción al menú para conectar a la base de datos
+bbddMenu.add_command(label="Salir", command=salirAplicacion) # Añadimos una opción al menú para desconectar de la base de datos
 
 borrarMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para borrar registros
 borrarMenu.add_command(label="Borrar") # Añadimos una opción al menú para borrar registros
