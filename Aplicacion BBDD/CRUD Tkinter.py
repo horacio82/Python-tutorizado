@@ -144,7 +144,7 @@ etiquetaApellido=Label(miFrame, text="Apellido:") # Creamos una etiqueta para el
 etiquetaApellido.grid(row=3, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
 
 etiquetaDireccion=Label(miFrame, text="Dirección:") # Creamos una etiqueta para la dirección
-etiquetaApellido.grid(row=4, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
+etiquetaDireccion.grid(row=4, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
 
 etiquetaComentario=Label(miFrame, text="Comentarios:") # Creamos una etiqueta para los comentarios  
 etiquetaComentario.grid(row=5, column=0, padx=10, pady=10) # Colocamos la etiqueta en la cuadrícula
