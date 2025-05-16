@@ -8,6 +8,8 @@ import sqlite3 # Importamos la librería sqlite3 para trabajar con bases de dato
 
 root=Tk() # Creamos la ventana principal de la aplicación
 
+
+
 #-------------------------conexión a la base de datos-------------------------
 
 def conectarBBDD(): # Definimos la función para conectar a la base de datos
@@ -43,19 +45,48 @@ def salirAplicacion(): # Definimos la función para salir de la aplicación
         root.destroy() # Si el usuario confirma, cerramos la aplicación
    
 
+def limpiarCampos(): # Definimos la función para limpiar los campos de entrada
+    mi_Id.set("") # Limpiamos el campo de ID
+    mi_Nombre.set("") # Limpiamos el campo de nombre
+    mi_Apellido.set("") # Limpiamos el campo de apellido
+    mi_Pass.set("") # Limpiamos el campo de contraseña
+    mi_Direccion.set("") # Limpiamos el campo de dirección
+    textoComentario.delete(1.0, END) # Limpiamos el campo de comentarios
+
+
+def crear(): # Definimos la función para crear un nuevo registro
+    mi_conexion=sqlite3.connect("Aplicacion BBDD/NegocioUsuarios") # Conectamos a la base de datos
+    mi_cursor=mi_conexion.cursor() # Creamos un cursor para ejecutar comandos SQL
+    mi_cursor.execute("INSERT INTO DATOSUSUARIOS VALUES(NULL, '"+mi_Nombre.get()+"','"+mi_Pass.get()+"','"+mi_Apellido.get()+"','"+mi_Direccion.get()+"','"+textoComentario.get("1.0", END)+"')") # Insertamos un nuevo registro en la tabla
+    mi_conexion.commit() # Guardamos los cambios en la base de datos
+    messagebox.showinfo("BBDD", "Registro insertado con éxito") # Mostramos un mensaje de éxito al insertar el registro
+
+#---------------------------------------------------------------------
 
 barraMenu=Menu(root) # Creamos una barra de menú en la ventana principal
 root.config(menu=barraMenu, width=300, height=300) # Configuramos la ventana principal para que use la barra de menú
+
+
+#-------------------------variables de control-------------------------
+
+mi_Id =StringVar() # Creamos una variable de control para el ID
+mi_Nombre =StringVar() # Creamos una variable de control para el nombre
+mi_Apellido =StringVar() # Creamos una variable de control para el apellido
+mi_Pass=StringVar() # Creamos una variable de control para la contraseña
+mi_Direccion=StringVar() # Creamos una variable de control para la dirección
+
+
+#----------------------------------------------------------------------
 
 bbddMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para la base de datos
 bbddMenu.add_command(label="Conectar", command=conectarBBDD) # Añadimos una opción al menú para conectar a la base de datos
 bbddMenu.add_command(label="Salir", command=salirAplicacion) # Añadimos una opción al menú para desconectar de la base de datos
 
 borrarMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para borrar registros
-borrarMenu.add_command(label="Borrar") # Añadimos una opción al menú para borrar registros
+borrarMenu.add_command(label="Borrar", command=limpiarCampos) # Añadimos una opción al menú para borrar registros
 
 crudMenu=Menu(barraMenu, tearoff=0) # Creamos un menú desplegable para operaciones CRUD
-crudMenu.add_command(label="Crear") # Añadimos una opción al menú para crear registros
+crudMenu.add_command(label="Crear", command=crear) # Añadimos una opción al menú para crear registros
 crudMenu.add_command(label="Leer") # Añadimos una opción al menú para leer registros
 crudMenu.add_command(label="Actualizar") # Añadimos una opción al menú para actualizar registros
 crudMenu.add_command(label="Borrar") # Añadimos una opción al menú para eliminar registros
@@ -74,21 +105,21 @@ barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu) # Añadimos el menú de ayu
 miFrame=Frame(root) # Creamos un marco (frame) para organizar los widgets
 miFrame.pack() # Añadimos el marco a la ventana principal
 
-cuadroId=Entry(miFrame) # Creamos un campo de entrada para el ID
+cuadroId=Entry(miFrame, textvariable=mi_Id) # Creamos un campo de entrada para el ID
 cuadroId.grid(row=0, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 
-cuadroNombre=Entry(miFrame) # Creamos un campo de entrada para el nombre
+cuadroNombre=Entry(miFrame, textvariable=mi_Nombre) # Creamos un campo de entrada para el nombre
 cuadroNombre.grid(row=1, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 cuadroNombre.config(fg="blue", justify="right") # Configuramos el color y la alineación del texto en el campo de entrada
 
-cuadroPass=Entry(miFrame) # Creamos un campo de entrada para la contraseña
+cuadroPass=Entry(miFrame, textvariable=mi_Pass) # Creamos un campo de entrada para la contraseña
 cuadroPass.grid(row=2, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 cuadroPass.config(show="*") # Configuramos el campo de entrada para ocultar la contraseña
 
-cuadroApellido=Entry(miFrame) # Creamos un campo de entrada para el apellido
+cuadroApellido=Entry(miFrame, textvariable=mi_Apellido) # Creamos un campo de entrada para el apellido
 cuadroApellido.grid(row=3, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 
-cuadroDireccion=Entry(miFrame) # Creamos un campo de entrada para la dirección
+cuadroDireccion=Entry(miFrame, textvariable=mi_Direccion) # Creamos un campo de entrada para la dirección
 cuadroDireccion.grid(row=4, column=1, padx=10, pady=10) # Colocamos el campo de entrada en la cuadrícula
 
 textoComentario=Text(miFrame, width=16, height=5) # Creamos un campo de texto para comentarios
@@ -124,7 +155,7 @@ etiquetaComentario.grid(row=5, column=0, padx=10, pady=10) # Colocamos la etique
 miFrameBotones=Frame(root) # Creamos un marco (frame) para los botones
 miFrameBotones.pack() # Añadimos el marco a la ventana principal
 
-botonCrear=Button(miFrameBotones, text="Crear") # Creamos un botón para crear registros
+botonCrear=Button(miFrameBotones, text="Crear", command=crear) # Creamos un botón para crear registros
 botonCrear.grid(row=1, column=0, sticky="e", padx=10, pady=10) # Colocamos el botón en la cuadrícula
 
 botonLeer=Button(miFrameBotones, text="Leer") # Creamos un botón para leer registros
