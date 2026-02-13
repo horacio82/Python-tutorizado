@@ -11,15 +11,25 @@ def resta(num1, num2):
 def multiplica(num1, num2):
 	return num1*num2
 
-def divide(num1,num2):		
-	return num1/num2
-	
+def divide(num1,num2):
 
-op1=(int(input("Introduce el primer número: ")))
+	try:		
+		return num1/num2
+	except ZeroDivisionError:
+		print("¡No se puede dividir por 0!")
+		return "Operación errónea"
 
-op2=(int(input("Introduce el segundo número: ")))		
-	
+while True:
+	try:
+		op1=(int(input("Introduce el primer número: ")))
+		op2=(int(input("Introduce el segundo número: ")))	
+		break
+
+	except ValueError:
+		print("Los valores no son correctos")
+
 operacion=input("Introduce la operación a realizar (suma,resta,multiplica,divide): ")
+
 
 if operacion=="suma":
 	print(suma(op1,op2))
