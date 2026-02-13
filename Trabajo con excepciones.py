@@ -1,3 +1,7 @@
+#PILDORAS INFORMÁTICAS
+#Python tutorizado. Excepciones I. Vídeo 25
+
+
 def suma(num1, num2):
 	return num1+num2
 
