@@ -14,7 +14,7 @@ def agregar_a_lista(lista, nombreIntroducido):
 
 introducidos = 1
 
-while introducido<11:
+while introducidos<11:
     nombre = input("Introduce nombre: ")
     agregar_a_lista(nombresPersonas, nombre)
     introducidos+1
