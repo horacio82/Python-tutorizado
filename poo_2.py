@@ -1,31 +1,40 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. POO V. Vídeo 33
+#Python tutorizado. POO V, VI - Vídeo 33, 34
 
 class Persona():
-    nombre = ""
-    apellido = ""
-    edad = 0
-    genero = "Sin definir"
+    __nombre = ""
+    __apellido = ""
+    __edad = 0
+    __genero = "Sin definir"
 
-    #Constructor:
-    def __init__(self, nombre, apellido, edad, genero):
-        self.nombre = nombre
-        self.apellido = apellido
-        self.edad = edad
-        self.genero = genero
+    #método constructor:
+    def __init__(self, nombre, apellido, genero):
+
+        #Encapsulados:
+        self.__nombre = nombre
+        self.__apellido = apellido
+        #self.__edad = edad
+        self.__genero = genero
+
+    def setEdad(self,laEdad):
+        if laEdad<0 or laEdad>100:
+            print("Error en la edad.")
+        else:
+            self.__edad = laEdad
+            return self.__edad    
 
     def hablar(self):
-        return "La persona que se llama",self.nombre,"está hablando"
+        return "La persona que se llama",self.__nombre,"está hablando"
     
     def caminar(self):
-        return "La persona que se llama",self.nombre,"está caminando"
+        return "La persona que se llama",self.__nombre,"está caminando"
     
     def getDatos(self):
-        return "Nombre",self.nombre,"Apellido:",self.apellido + \
-            " Edad:",self.edad," Género:",self.edad
+        return "Nombre",self.__nombre,"Apellido:",self.__apellido + \
+            " Edad:",self.__edad," Género:",self.__genero
     
-p1 = Persona("Horacio","Molinari",44,"masculino")
+
+p1 = Persona("Horacio","Molinari","masculino")
+p1.setEdad(-44)
 print(p1.getDatos())
 
-p2 = Persona("Ivan","Molinari",22,"masculino")
-print(p2.getDatos())
