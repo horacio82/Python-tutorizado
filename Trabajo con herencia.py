@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. POO VIII, XI, X - Vídeos 36, 37, 38:
+#Python tutorizado. POO VIII, XI, X, XI - Vídeos 36, 37, 38, 39:
 
 class Persona:
     def __init__(self, nombre, apellido, edad, *args, **kwargs):
