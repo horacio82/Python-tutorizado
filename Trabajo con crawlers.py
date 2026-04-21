@@ -1,4 +1,4 @@
-#Python tutorizado. Crawlers II. Vídeo 50
+#Python tutorizado. Crawlers II, III, IV - Vídeo 50, 51, 52
 #vemos cómo extraer información de una página web desde Python
 
 
