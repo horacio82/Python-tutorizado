@@ -1,9 +1,10 @@
-#Python tutorizado. Crawlers II, III, IV, V - Vídeo 50, 51, 52, 53, 
+#Python tutorizado. Crawlers II, III, IV, V, VI - Vídeo 50, 51, 52, 53, 54
 #vemos cómo extraer información de una página web desde Python
 
 
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
 class PostCrawled():
 
@@ -19,7 +20,8 @@ class PostExtractor():
 
     def extraer(self):
 
-        miDoc=requests.get("https://www.youtube.com/watch?v=X4d4barv1fA")
+        urlBase="https://www.youtube.com/watch?v=X4d4barv1fA"
+        miDoc=requests.get(urlBase)
 
         docFinal=BeautifulSoup(miDoc.text,"html.parser")
 
@@ -29,7 +31,7 @@ class PostExtractor():
             titulo=card.select(".card-title span")[1].text
             emoticono=card.select_one(".emoji").text
             contenido=card.select_one(".card-text").text
-            imagen=card.select_one("img").attrs["src"]
+            imagen=urljoin(urlBase, card.select_one("img").attrs["src"])
 
             crawled=PostCrawled(titulo, emoticono, contenido, imagen)
             posts.append(crawled)
@@ -45,5 +47,5 @@ for post in listaPosts:
     print(post.contenido)
     print(post.imagen)
     print()
-    
+
 #print(listaPosts)
