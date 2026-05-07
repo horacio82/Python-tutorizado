@@ -1,5 +1,6 @@
 #PILDORAS INFORMATICAS
 #Python tutorizado. Estructuras de datos I. Vídeo 58
+
 # Un set es una colección de elementos únicos, sin orden específico. No permite elementos duplicados y no mantiene un orden fijo. Es útil para almacenar elementos únicos y realizar operaciones de conjunto como unión, intersección y diferencia.
 
 
