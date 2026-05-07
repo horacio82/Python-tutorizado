@@ -1,4 +1,4 @@
-#Python tutorizado. Crawlers II, III, IV, V, VI, VII - Vídeo 50, 51, 52, 53, 54, 55
+#Python tutorizado. Crawlers II, III, IV, V, VI, VII, VIII - Vídeo 50, 51, 52, 53, 54, 55, 56
 #vemos cómo extraer información de una página web desde Python
 
 
@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import time
+import csv
 
 class PostCrawled():
 
@@ -67,3 +68,10 @@ for post in listaPosts:
     print()
 
 #print(listaPosts)
+
+with open('post.csv', 'w',newline='', encoding='utf-8') as csvfile:
+    postwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    
+    for mipost in unPost.extraer():
+        postwriter.writerow([mipost.titulo, mipost.emoticono, mipost.contenido, mipost.imagen])    
+    
