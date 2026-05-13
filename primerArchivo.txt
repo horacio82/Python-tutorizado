@@ -1,0 +1,2 @@
+Bienvenidos a mi primer archivo externo
+Guardamos información en el archivo externo de forma permanente
