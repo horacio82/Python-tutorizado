@@ -1,5 +1,5 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Archivos externos I. Vídeo 60
+#Python tutorizado. Archivos externos I, II. Vídeo 60, 61
 
 '''Comenzamos a ver en este vídeo el acceso externo a ficheros desde Python. El acceso externo se utiliza para almacenar y leer información en archivos externos. La ventaja es que la información se puede almacenar de forma permanente'''
 
@@ -7,10 +7,8 @@ from io import open
 
 archivo_externo = open("primerArchivo.txt", "r") #Abrimos el archivo externo en modo lectura
 
-#archivo_externo.write("\nGuardamos información en el archivo externo de forma permanente") #Escribimos una línea en el archivo externo
+print(archivo_externo.read()) #Leemos el contenido del archivo externo
 
-informacion_lineas = archivo_externo.readlines()
+archivo_externo.seek(6) #Volvemos a colocar el cursor de lectura al principio del archivo
 
-archivo_externo.close() #Cerramos el archivo para que se guarden los cambios realizados
-
-print(informacion_lineas[0]) #Mostramos el contenido del archivo externo
+print(archivo_externo.read()) #Si intentamos leer el archivo externo de nuevo, no se muestra nada porque el cursor de lectura ya está al final del archivo
