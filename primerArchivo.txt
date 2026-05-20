@@ -1,3 +1,5 @@
 Bienvenidos a mi primer archivo externo
-Guardamos informaciï¿½n en el archivo externo de forma permanente
+Esta línea ha sido modificada
 Estamos escribiendo en el archivo externo
+ escribiendo en el archivo externo
+
