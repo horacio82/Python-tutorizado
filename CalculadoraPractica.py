@@ -11,7 +11,7 @@ miFrame.pack()
 
 display=Entry(miFrame)
 display.grid(row=1, column=1, columnspan=4, padx=3, pady=3)
-display.config(bg="black", fg="#03f943", justify="right")
+display.config(bg="black", fg="#03f943", justify="right", width=15, font=("arial", 18, "bold")) #configuración del cuadro de texto: color de fondo, color de letra, justificación del texto, ancho y tipo de letra
 
 
 #---------------------primer fila---------------------
