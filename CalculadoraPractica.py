@@ -1,5 +1,5 @@
 #PILDORAS INDORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora I, II. Vídeo 71, 72
+#Python tutorizado. Práctica guiada. Calculadora I, II, III. Vídeo 71, 72, 73
 
 from tkinter import *
 
@@ -9,13 +9,46 @@ miFrame=Frame(raiz)
 
 miFrame.pack()  
 
+operacion="" #variable para almacenar la operación que se va a realizar
+
+resultado=0 #variable para almacenar el resultado de la operación
+
 digitoDisplay=StringVar() #variable para almacenar el número que se va a mostrar en el display
 
 
 #----------------------pulsaciones numéricas----------------------
 
 def pulsacionesNumericas(numeroPulsado):
-    digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
+    global operacion
+    if operacion!="":
+        digitoDisplay.set(numeroPulsado)
+        operacion=""
+    else:
+        digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
+
+
+#----------------------función suma----------------------
+
+def suma(num):
+    global operacion, resultado
+
+    resultado+=int(num)
+
+    operacion="suma"
+
+    digitoDisplay.set(resultado)
+
+
+#----------------------función total----------------------
+
+def total():
+
+    global resultado
+
+    digitoDisplay.set(resultado+int(digitoDisplay.get()))
+
+    resultado=0
+
 
 
 
@@ -75,10 +108,10 @@ boton0.grid(row=5, column=1)
 botonPunto=Button(miFrame, text=",", width=4, command=lambda: pulsacionesNumericas("."))
 botonPunto.grid(row=5, column=2)
 
-botonIgual=Button(miFrame, text="=", width=4)
+botonIgual=Button(miFrame, text="=", width=4, command=lambda: total())
 botonIgual.grid(row=5, column=3)
 
-botonSuma=Button(miFrame, text="+", width=4)
+botonSuma=Button(miFrame, text="+", width=4, command=lambda: suma(digitoDisplay.get()))
 botonSuma.grid(row=5, column=4)
 
 
