@@ -1,5 +1,6 @@
-#PILDORAS INDORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora I, II, III. Vídeo 71, 72, 73
+# PILDORAS INDORMATICAS
+# Python tutorizado. Práctica guiada. Calculadora I, II, III, IV. 
+# Vídeo 71, 72, 73, 74
 
 from tkinter import *
 
@@ -20,11 +21,24 @@ digitoDisplay=StringVar() #variable para almacenar el número que se va a mostra
 
 def pulsacionesNumericas(numeroPulsado):
     global operacion
+
     if operacion!="":
+
         digitoDisplay.set(numeroPulsado)
+
         operacion=""
+
     else:
-        digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
+
+        if numeroPulsado=="0" and digitoDisplay.get()=="0":
+            digitoDisplay.set("0")
+        elif numeroPulsado=="." and digitoDisplay.get()=="0":
+            digitoDisplay.set(digitoDisplay.get() + numeroPulsado)    
+        elif numeroPulsado!="0" and digitoDisplay.get()=="0":   
+            digitoDisplay.set(numeroPulsado) 
+        
+        else:
+            digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
 
 
 #----------------------función suma----------------------
@@ -57,6 +71,7 @@ display=Entry(miFrame, textvariable=digitoDisplay) #creación del cuadro de text
 display.grid(row=1, column=1, columnspan=4, padx=3, pady=3)
 display.config(bg="black", fg="#03f943", justify="right", width=15, font=("arial", 18, "bold")) #configuración del cuadro de texto: color de fondo, color de letra, justificación del texto, ancho y tipo de letra
 
+digitoDisplay.set("0") #se asigna el valor 0 a la variable digitoDisplay para que se muestre en el cuadro de texto al iniciar la calculadora
 
 #---------------------primer fila---------------------
 
