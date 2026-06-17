@@ -14,13 +14,16 @@ operacion="" #variable para almacenar la operación que se va a realizar
 
 resultado=0 #variable para almacenar el resultado de la operación
 
+coma=False #variable para controlar si se ha pulsado la coma decimal
+
 digitoDisplay=StringVar() #variable para almacenar el número que se va a mostrar en el display
 
 
 #----------------------pulsaciones numéricas----------------------
 
-def pulsacionesNumericas(numeroPulsado):
+def pulsacionesTeclas(numeroPulsado):
     global operacion
+    global coma
 
     if operacion!="":
 
@@ -32,13 +35,23 @@ def pulsacionesNumericas(numeroPulsado):
 
         if numeroPulsado=="0" and digitoDisplay.get()=="0":
             digitoDisplay.set("0")
+
         elif numeroPulsado=="." and digitoDisplay.get()=="0":
-            digitoDisplay.set(digitoDisplay.get() + numeroPulsado)    
+            digitoDisplay.set(digitoDisplay.get() + 
+            numeroPulsado)    
+            coma=True
+
         elif numeroPulsado!="0" and digitoDisplay.get()=="0":   
             digitoDisplay.set(numeroPulsado) 
         
-        else:
+        elif numeroPulsado=="." and coma==False:
             digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
+            coma=True
+        elif numeroPulsado!="." and coma==True:    
+            digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
+            
+        elif numeroPulsado!="." and coma==False:
+            digitoDisplay.set(digitoDisplay.get() + numeroPulsado)  
 
 
 #----------------------función suma----------------------
@@ -75,13 +88,13 @@ digitoDisplay.set("0") #se asigna el valor 0 a la variable digitoDisplay para qu
 
 #---------------------primer fila---------------------
 
-boton7=Button(miFrame, text="7", width=4, command=lambda: pulsacionesNumericas("7")) 
+boton7=Button(miFrame, text="7", width=4, command=lambda: pulsacionesTeclas("7")) 
 boton7.grid(row=2, column=1)
 
-boton8=Button(miFrame, text="8", width=4, command=lambda: pulsacionesNumericas("8")) 
+boton8=Button(miFrame, text="8", width=4, command=lambda: pulsacionesTeclas("8")) 
 boton8.grid(row=2, column=2)
 
-boton9=Button(miFrame, text="9", width=4, command=lambda: pulsacionesNumericas("9"))
+boton9=Button(miFrame, text="9", width=4, command=lambda: pulsacionesTeclas("9"))
 boton9.grid(row=2, column=3)
 
 botonDiv=Button(miFrame, text="/", width=4)
@@ -89,13 +102,13 @@ botonDiv.grid(row=2, column=4)
 
 #---------------------segunda fila---------------------
 
-boton4=Button(miFrame, text="4", width=4, command=lambda: pulsacionesNumericas("4"))
+boton4=Button(miFrame, text="4", width=4, command=lambda: pulsacionesTeclas("4"))
 boton4.grid(row=3, column=1)
 
-boton5=Button(miFrame, text="5", width=4, command=lambda: pulsacionesNumericas("5"))
+boton5=Button(miFrame, text="5", width=4, command=lambda: pulsacionesTeclas("5"))
 boton5.grid(row=3, column=2)
 
-boton6=Button(miFrame, text="6", width=4, command=lambda: pulsacionesNumericas("6"))
+boton6=Button(miFrame, text="6", width=4, command=lambda: pulsacionesTeclas("6"))
 boton6.grid(row=3, column=3)
 
 botonMult=Button(miFrame, text="*", width=4)
@@ -103,13 +116,13 @@ botonMult.grid(row=3, column=4)
 
 #---------------------tercera fila---------------------
 
-boton1=Button(miFrame, text="1", width=4, command=lambda: pulsacionesNumericas("1"))
+boton1=Button(miFrame, text="1", width=4, command=lambda: pulsacionesTeclas("1"))
 boton1.grid(row=4, column=1)
 
-boton2=Button(miFrame, text="2", width=4, command=lambda: pulsacionesNumericas("2"))
+boton2=Button(miFrame, text="2", width=4, command=lambda: pulsacionesTeclas("2"))
 boton2.grid(row=4, column=2)
 
-boton3=Button(miFrame, text="3", width=4, command=lambda: pulsacionesNumericas("3"))
+boton3=Button(miFrame, text="3", width=4, command=lambda: pulsacionesTeclas("3"))
 boton3.grid(row=4, column=3)
 
 botonResta=Button(miFrame, text="-", width=4)
@@ -117,10 +130,10 @@ botonResta.grid(row=4, column=4)
 
 #---------------------cuarta fila---------------------
 
-boton0=Button(miFrame, text="0", width=4, command=lambda: pulsacionesNumericas("0"))
+boton0=Button(miFrame, text="0", width=4, command=lambda: pulsacionesTeclas("0"))
 boton0.grid(row=5, column=1)
 
-botonPunto=Button(miFrame, text=",", width=4, command=lambda: pulsacionesNumericas("."))
+botonPunto=Button(miFrame, text=",", width=4, command=lambda: pulsacionesTeclas("."))
 botonPunto.grid(row=5, column=2)
 
 botonIgual=Button(miFrame, text="=", width=4, command=lambda: total())
