@@ -1,6 +1,6 @@
 # PILDORAS INDORMATICAS
-# Python tutorizado. Práctica guiada. Calculadora I, II, III, IV. 
-# Vídeo 71, 72, 73, 74
+# Python tutorizado. Práctica guiada. Calculadora I, II, III, IV, V, VI 
+# Vídeo 71, 72, 73, 74, 75, 76
 
 from tkinter import *
 
@@ -17,6 +17,23 @@ resultado=0 #variable para almacenar el resultado de la operación
 coma=False #variable para controlar si se ha pulsado la coma decimal
 
 digitoDisplay=StringVar() #variable para almacenar el número que se va a mostrar en el display
+
+
+#----------------------funvión alternativa para la coma----------------------
+
+def pulsaciones_coma():
+
+    contador=0
+
+    for i in digitoDisplay.get():
+
+        if i==".":
+
+            contador+=1
+
+    if contador==0:
+
+        digitoDisplay.set(digitoDisplay.get() + ".")
 
 
 #----------------------pulsaciones numéricas----------------------
@@ -49,7 +66,7 @@ def pulsacionesTeclas(numeroPulsado):
             coma=True
         elif numeroPulsado!="." and coma==True:    
             digitoDisplay.set(digitoDisplay.get() + numeroPulsado)
-            
+
         elif numeroPulsado!="." and coma==False:
             digitoDisplay.set(digitoDisplay.get() + numeroPulsado)  
 
@@ -59,7 +76,7 @@ def pulsacionesTeclas(numeroPulsado):
 def suma(num):
     global operacion, resultado
 
-    resultado+=int(num)
+    resultado+=float(num)
 
     operacion="suma"
 
@@ -72,7 +89,7 @@ def total():
 
     global resultado
 
-    digitoDisplay.set(resultado+int(digitoDisplay.get()))
+    digitoDisplay.set(resultado+float(digitoDisplay.get()))
 
     resultado=0
 
@@ -133,7 +150,7 @@ botonResta.grid(row=4, column=4)
 boton0=Button(miFrame, text="0", width=4, command=lambda: pulsacionesTeclas("0"))
 boton0.grid(row=5, column=1)
 
-botonPunto=Button(miFrame, text=",", width=4, command=lambda: pulsacionesTeclas("."))
+botonPunto=Button(miFrame, text=",", width=4, command=lambda: pulsaciones_coma())
 botonPunto.grid(row=5, column=2)
 
 botonIgual=Button(miFrame, text="=", width=4, command=lambda: total())
