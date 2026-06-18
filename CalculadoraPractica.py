@@ -1,5 +1,5 @@
 # PILDORAS INDORMATICAS
-# Python tutorizado. Práctica guiada. Calculadora I, II, III, IV, V, VI 
+# Python tutorizado. Práctica guiada. Calculadora - I, II, III, IV, V, VI 
 # Vídeo 71, 72, 73, 74, 75, 76
 
 from tkinter import *
@@ -78,9 +78,13 @@ def suma(num):
 
     resultado+=float(num)
 
-    operacion="suma"
+    if resultado.is_integer():
+        digitoDisplay.set(int(resultado))
 
-    digitoDisplay.set(resultado)
+        operacion="suma"
+    else:
+        operacion="suma"
+        digitoDisplay.set(resultado)
 
 
 #----------------------función total----------------------
@@ -89,9 +93,13 @@ def total():
 
     global resultado
 
-    digitoDisplay.set(resultado+float(digitoDisplay.get()))
+    if resultado + float(digitoDisplay.get()).is_integer():
 
-    resultado=0
+        digitoDisplay.set(int(resultado+float(digitoDisplay.get())))
+    else:
+        digitoDisplay.set(resultado+float(digitoDisplay.get()))
+
+        resultado=0
 
 
 
