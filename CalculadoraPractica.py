@@ -1,6 +1,6 @@
 # PILDORAS INDORMATICAS
-# Python tutorizado. Práctica guiada. Calculadora - I, II, III, IV, V, VI 
-# Vídeo 71, 72, 73, 74, 75, 76
+# Python tutorizado. Práctica guiada. Calculadora - I, II, III, IV, V, VI, VII 
+# Vídeo 71, 72, 73, 74, 75, 76, 77
 
 from tkinter import *
 
