@@ -1,8 +1,10 @@
 #PILDORAS INFORMATICAS
-#Python tutorizado. Práctica guiada. Calculadora POO, II
-#Vídeo 78, 79
+#Python tutorizado. Práctica guiada. Calculadora POO, II, III, IV
+#Vídeo 78, 79, 80, 81
 
 from tkinter import *
+import re
+
 
 raiz=Tk()
 
@@ -12,6 +14,7 @@ class Calculadora:
 
         self.ventana=ventana
         self.ventana.title("Calculadora POO")
+        self.operacion=""
 
         #agregar display-------------------------------------------
         self.display=Entry(ventana, font="Arial 15")
@@ -24,25 +27,26 @@ class Calculadora:
         boton7=self.colocar_boton(7)
         boton8=self.colocar_boton(8)
         boton9=self.colocar_boton(9)
-        botonDiv=self.colocar_boton("/", mostrar=False)
+        botonDiv=self.colocar_boton("/")
 
         #----------------------------------------------------------
         boton4=self.colocar_boton(4)
         boton5=self.colocar_boton(5)
         boton6=self.colocar_boton(6)
-        botonx=self.colocar_boton("*", mostrar=False)
+        botonx=self.colocar_boton(u"\u00D7")  # Usar el símbolo de multiplicación "×" en lugar de "*"
+        botonx.config(text="x")  # Cambiar el texto del botón de multiplicación a "x"
 
         #----------------------------------------------------------
         boton1=self.colocar_boton(1)
         boton2=self.colocar_boton(2)
         boton3=self.colocar_boton(3)
-        botonResta=self.colocar_boton("-", mostrar=False)
+        botonResta=self.colocar_boton("-")
 
         #----------------------------------------------------------
         botonCero=self.colocar_boton(0)
         botonComa=self.colocar_boton(".")
         botonIgual=self.colocar_boton("=", mostrar=False)
-        botonMas=self.colocar_boton("+", mostrar=False)
+        botonMas=self.colocar_boton("+")
 
         #----------------------------------------------------------
 
@@ -57,10 +61,27 @@ class Calculadora:
                 contador+=1
 
     def colocar_boton(self, valor, mostrar=True, ancho=9, alto=2):
-        return Button(self.ventana, text=valor, width=ancho, height=alto, font=("Tahoma", 9))
+        return Button(self.ventana, text=valor, width=ancho, height=alto, font=("Tahoma", 9), command=lambda:self.pulsaciones_teclas(valor, mostrar))
+        
+    def pulsaciones_teclas(self, valor, mostrar):
+        if mostrar:
+            self.operacion+=str(valor)
+            self.mostrar_pantalla(valor)
+        elif not mostrar and valor=="=":
+            self.operacion=re.sub(u"\u00D7", "*", self.operacion)  # Reemplazar el símbolo de multiplicación "×" por "*"
+            self.borrar_pantalla()
+            self.mostrar_pantalla(str(eval(self.operacion)))    
+        else:
+            pass
+
+    def mostrar_pantalla(self, valor):
+        self.display.insert(END, valor)        
+
+    def borrar_pantalla(self):
+        self.display.delete(0, END)
         
 
 
 mi_calculadora=Calculadora(raiz)
 
-raiz.mainloop()
+raiz=mainloop()        
