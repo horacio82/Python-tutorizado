@@ -2,7 +2,7 @@
 #VIDEO 82 - CALCULADORA POO V
 
 from tkinter import *
-from Operaciones_Calculadora import *
+from moduloCalculadoras.Operaciones_Calculadora import *
 
 
 contador=0

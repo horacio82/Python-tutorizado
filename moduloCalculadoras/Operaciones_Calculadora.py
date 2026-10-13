@@ -3,7 +3,7 @@
 
 from tkinter import *
 import re
-from Resultados_Pantalla import *
+from moduloCalculadoras.Resultados_Pantalla import *
 
 def pulsaciones_teclas(self, valor, mostrar):
         if mostrar:
